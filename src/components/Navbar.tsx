@@ -1,5 +1,4 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
@@ -13,31 +12,42 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <AppBar position="static" className="bg-blue-600">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link to="/" className="text-white no-underline font-bold">
-            StayFinder
-          </Link>
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 2 }}>
-          {isLoggedIn ? (
-            <Button color="inherit" onClick={handleLogout}>
-              Logout
-            </Button>
-          ) : (
-            <>
-              <Button color="inherit" component={Link} to="/login">
-                Login
-              </Button>
-              <Button color="inherit" component={Link} to="/register">
-                Register
-              </Button>
-            </>
-          )}
-        </Box>
-      </Toolbar>
-    </AppBar>
+    <nav className="bg-blue-600 shadow-lg">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex-shrink-0">
+            <Link to="/" className="text-white text-xl font-bold hover:text-blue-100 transition-colors">
+              StayFinder
+            </Link>
+          </div>
+          <div className="flex items-center space-x-4">
+            {isLoggedIn ? (
+              <button 
+                onClick={handleLogout}
+                className="text-white hover:text-blue-100 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                Logout
+              </button>
+            ) : (
+              <>
+                <Link 
+                  to="/login"
+                  className="text-white hover:text-blue-100 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Login
+                </Link>
+                <Link 
+                  to="/register"
+                  className="text-white hover:text-blue-100 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Register
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 

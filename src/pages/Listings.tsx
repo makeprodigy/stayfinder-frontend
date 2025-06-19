@@ -1,16 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Container,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  CircularProgress,
-  Alert,
-  Box,
-  Button
-} from '@mui/material';
+import { CircularProgress, Alert } from '@mui/material';
 import { Link } from 'react-router-dom';
 import apiClient from '../api/axios';
 import { Listing } from '../types';
@@ -37,74 +26,63 @@ const Listings: React.FC = () => {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+      <div className="flex justify-center items-center min-h-[80vh]">
         <CircularProgress />
-      </Box>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Container maxWidth="lg" className="py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <Alert severity="error">{error}</Alert>
-      </Container>
+      </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <Container maxWidth="lg">
-        <Typography variant="h4" component="h1" className="font-bold mb-8 text-center text-gray-800">
+      <div className="max-w-7xl mx-auto px-4">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800">
           Explore Our Listings
-        </Typography>
-        <Grid container spacing={4}>
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {listings.map((listing) => (
-            <Grid item key={listing._id} xs={12} sm={6} md={4}>
-              <Card
-                sx={{ 
-                  height: '100%', 
-                  display: 'flex', 
-                  flexDirection: 'column',
-                  transition: 'transform 0.3s, box-shadow 0.3s',
-                  '&:hover': {
-                    transform: 'scale(1.03)',
-                    boxShadow: 6
-                  }
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={listing.images[0] || 'https://via.placeholder.com/400x250.png?text=No+Image'}
+            <article 
+              key={listing._id} 
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 flex flex-col h-full"
+            >
+              <div className="aspect-w-16 aspect-h-9">
+                <img
+                  src={listing.images[0] || 'https://via.placeholder.com/400x250.png?text=No+Image'}
                   alt={listing.title}
+                  className="w-full h-48 object-cover"
                 />
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h6" component="div">
-                    {listing.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" className="mb-2">
-                    {listing.location}
-                  </Typography>
-                  <Typography variant="h5" color="primary" className="font-bold">
+              </div>
+              <div className="p-6 flex-grow flex flex-col">
+                <h2 className="text-xl font-semibold mb-2 text-gray-900">
+                  {listing.title}
+                </h2>
+                <p className="text-gray-600 text-sm mb-3">
+                  📍 {listing.location}
+                </p>
+                <div className="mt-auto">
+                  <p className="text-2xl font-bold text-blue-600 mb-4">
                     ${listing.price}
                     <span className="text-base font-normal text-gray-600">/night</span>
-                  </Typography>
-                </CardContent>
-                <Box sx={{ p: 2, pt: 0 }}>
-                  <Button
-                    component={Link}
+                  </p>
+                  <Link
                     to={`/listing/${listing._id}`}
-                    fullWidth
-                    variant="contained"
+                    className="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
                   >
                     View Details
-                  </Button>
-                </Box>
-              </Card>
-            </Grid>
+                  </Link>
+                </div>
+              </div>
+            </article>
           ))}
-        </Grid>
-      </Container>
+        </div>
+      </div>
     </div>
   );
 };
