@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import {
-  Container,
-  Paper,
   TextField,
   Button,
   Typography,
-  Box,
   Alert,
 } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -46,6 +43,14 @@ const Register: React.FC = () => {
     }
   };
 
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1); // Go back to previous page
+    } else {
+      navigate('/'); // Go to home if no history
+    }
+  };
+
   return (
     <div className="h-screen flex overflow-hidden">
       {/* Left Side - Hero Image (Desktop) */}
@@ -56,6 +61,24 @@ const Register: React.FC = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+        
+                 {/* Back Button for Desktop */}
+         <div className="absolute top-6 left-6">
+           <button
+             onClick={handleBack}
+             className="flex items-center justify-center bg-black/30 hover:bg-black/50 backdrop-blur-sm text-white w-10 h-10 rounded-xl font-medium transition-all duration-200 group"
+             title="Back"
+           >
+             <svg 
+               className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" 
+               fill="none" 
+               stroke="currentColor" 
+               viewBox="0 0 24 24"
+             >
+               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+             </svg>
+           </button>
+         </div>
         
         {/* Bottom overlay text */}
         <div className="absolute bottom-8 left-8 right-8">
@@ -73,6 +96,25 @@ const Register: React.FC = () => {
                       before:absolute before:inset-0 before:bg-cover before:bg-center before:bg-no-repeat before:content-[''] 
                       before:bg-[linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)),url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop')]
                       lg:before:hidden">
+        
+                 {/* Back Button for Mobile */}
+         <div className="absolute top-6 left-6 lg:hidden z-20">
+           <button
+             onClick={handleBack}
+             className="flex items-center justify-center bg-black/30 hover:bg-black/50 backdrop-blur-sm text-white w-10 h-10 rounded-xl font-medium transition-all duration-200 group"
+             title="Back"
+           >
+             <svg 
+               className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" 
+               fill="none" 
+               stroke="currentColor" 
+               viewBox="0 0 24 24"
+             >
+               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+             </svg>
+           </button>
+         </div>
+
         <div className="w-full max-w-md bg-white/20 lg:bg-white backdrop-blur-xl lg:backdrop-blur-none rounded-xl lg:rounded-none shadow-2xl lg:shadow-none border border-white/30 lg:border-none relative z-10">
           <motion.div
             className="w-full p-6 lg:p-0"

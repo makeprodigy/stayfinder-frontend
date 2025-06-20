@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const token = localStorage.getItem('token');
   const isLoggedIn = !!token;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -13,9 +12,7 @@ const Navbar: React.FC = () => {
     navigate('/');
   };
 
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -48,18 +45,6 @@ const Navbar: React.FC = () => {
               >
                 Hotels
               </Link>
-              <button 
-                onClick={() => navigate('/listings')}
-                className="text-white hover:text-gray-300 text-base font-normal transition-colors"
-              >
-                Destinations
-              </button>
-              <button 
-                onClick={() => navigate('/listings')}
-                className="text-white hover:text-gray-300 text-base font-normal transition-colors"
-              >
-                Deals
-              </button>
             </div>
 
             {/* Right Side Actions */}
@@ -67,7 +52,7 @@ const Navbar: React.FC = () => {
               {isLoggedIn ? (
                 <div className="flex items-center space-x-3">
                   <button 
-                    onClick={() => navigate('/listings')}
+                    onClick={() => navigate('/dashboard')}
                     className="text-white border border-white/40 hover:bg-white/10 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
                   >
                     My Bookings
@@ -103,7 +88,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Header - Only visible on mobile */}
       <div className="lg:hidden fixed top-6 left-6 right-6 z-50 flex items-center justify-between">
         {/* App Name */}
-        <Link to="/" className="text-white text-xl font-bold hover:text-gray-200 transition-colors">
+        <Link to="/" className="text-white text-2xl font-bold hover:text-gray-200 transition-colors">
           StayFinder
         </Link>
         
@@ -161,34 +146,7 @@ const Navbar: React.FC = () => {
                 Hotels
               </div>
             </Link>
-            <button 
-              onClick={() => {
-                navigate('/listings');
-                toggleMobileMenu();
-              }}
-              className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10 text-left w-full"
-            >
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-                Destinations
-              </div>
-            </button>
-            <button 
-              onClick={() => {
-                navigate('/listings');
-                toggleMobileMenu();
-              }}
-              className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10 text-left w-full"
-            >
-              <div className="flex items-center">
-                <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-                Deals
-              </div>
-            </button>
+
             
             <hr className="border-white/20 my-4" />
             
@@ -197,7 +155,7 @@ const Navbar: React.FC = () => {
               <div className="space-y-3">
                 <button 
                   onClick={() => {
-                    navigate('/listings');
+                    navigate('/dashboard');
                     toggleMobileMenu();
                   }}
                   className="block w-full text-white border border-white/40 hover:bg-white/10 text-center py-3 px-4 rounded-lg transition-all"
