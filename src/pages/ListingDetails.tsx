@@ -418,33 +418,35 @@ const ListingDetails: React.FC = () => {
 
             {/* Host Information */}
             <div className="border-t border-gray-200 pt-8">
-              <div className="flex items-center gap-4 p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl border border-gray-100">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 sm:p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl border border-gray-100">
+                <div className="w-16 h-16 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg flex-shrink-0">
                   {listing.host.name.charAt(0).toUpperCase()}
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Typography variant="h6" className="text-gray-800 font-semibold">
+                <div className="flex-1 text-center sm:text-left">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+                    <Typography variant="h6" className="text-gray-800 font-semibold text-base sm:text-lg">
                       Hosted by {listing.host.name}
                     </Typography>
-                    <div className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-medium">
+                    <div className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-medium inline-block self-center sm:self-auto">
                       Superhost
                     </div>
                   </div>
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <svg className="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <span>Member since {new Date(listing.host.createdAt).getFullYear()}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center text-gray-600 text-sm gap-1 sm:gap-0">
+                    <div className="flex items-center justify-center sm:justify-start">
+                      <svg className="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <span>Member since {new Date(listing.host.createdAt).getFullYear()}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-4 mt-2 text-sm">
-                    <div className="flex items-center text-yellow-600">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mt-2 text-sm">
+                    <div className="flex items-center justify-center sm:justify-start text-yellow-600">
                       <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                       </svg>
                       <span className="font-medium">4.9 rating</span>
                     </div>
-                    <div className="flex items-center text-gray-500">
+                    <div className="flex items-center justify-center sm:justify-start text-gray-500">
                       <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                       </svg>
@@ -452,12 +454,14 @@ const ListingDetails: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <Button
-                  variant="outlined"
-                  className="border-blue-300 text-blue-600 hover:bg-blue-50 px-6 py-2 rounded-xl font-medium"
-                >
-                  Contact Host
-                </Button>
+                <div className="w-full sm:w-auto mt-4 sm:mt-0">
+                  <Button
+                    variant="outlined"
+                    className="border-blue-300 text-blue-600 hover:bg-blue-50 px-4 sm:px-6 py-2 rounded-xl font-medium w-full sm:w-auto text-sm sm:text-base"
+                  >
+                    Contact Host
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
