@@ -310,7 +310,3 @@ This project is licensed under the MIT License.
 - **Icons**: Heroicons
 - **Images**: Unsplash
 - **Deployment**: Vercel
-
----
-
-**Built with ❤️ for the StayFinder hotel booking platform**
