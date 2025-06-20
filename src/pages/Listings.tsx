@@ -152,9 +152,9 @@ const Listings: React.FC = () => {
         </div>
 
         {/* Search Section */}
-        <div className="flex flex-col md:flex-row gap-6 items-center mb-12 max-w-5xl mx-auto">
-          {/* Search Input */}
-          <div className="flex-1 w-full">
+        <div className="mb-12 max-w-6xl mx-auto">
+          {/* Search Input Row */}
+          <div className="mb-6">
             <div className="relative group">
               <div className="absolute left-2.5 sm:left-3 top-1/2 transform -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400">
                 <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -181,69 +181,76 @@ const Listings: React.FC = () => {
             </div>
           </div>
 
-          {/* Location Filter */}
-          <div className="w-full md:w-auto">
-            <CustomDropdown
-              options={uniqueLocations.map(location => ({ value: location, label: location }))}
-              value={locationFilter}
-              onChange={(value) => setLocationFilter(value)}
-              placeholder="All Locations"
-              focusColor="blue"
-              className="w-full md:w-72"
-              icon={
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              }
-            />
-          </div>
+          {/* Filters Row */}
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+            {/* Left Side - Filter Dropdowns */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              {/* Location Filter */}
+              <div className="w-full sm:w-auto">
+                <CustomDropdown
+                  options={uniqueLocations.map(location => ({ value: location, label: location }))}
+                  value={locationFilter}
+                  onChange={(value) => setLocationFilter(value)}
+                  placeholder="All Locations"
+                  focusColor="blue"
+                  className="w-full sm:w-52 lg:w-60"
+                  icon={
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  }
+                />
+              </div>
 
-          {/* Price Range Filter */}
-          <div className="w-full md:w-auto">
-            <CustomDropdown
-              options={priceRanges.map(range => ({ value: range.label, label: range.label }))}
-              value={priceFilter}
-              onChange={(value) => setPriceFilter(value)}
-              placeholder="All Prices"
-              focusColor="green"
-              className="w-full md:w-72"
-              icon={
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                </svg>
-              }
-            />
-          </div>
-
-          {/* Clear All Filters Button */}
-          {(searchFilter || locationFilter !== 'All Locations' || priceFilter !== 'All Prices') && (
-            <div className="w-full md:w-auto">
-              <button
-                onClick={() => {
-                  setSearchFilter('');
-                  setLocationFilter('All Locations');
-                  setPriceFilter('All Prices');
-                }}
-                className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white w-12 h-12 md:w-14 md:h-14 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group"
-                title="Clear All Filters"
-              >
-                <svg className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-200 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-              </button>
+              {/* Price Range Filter */}
+              <div className="w-full sm:w-auto">
+                <CustomDropdown
+                  options={priceRanges.map(range => ({ value: range.label, label: range.label }))}
+                  value={priceFilter}
+                  onChange={(value) => setPriceFilter(value)}
+                  placeholder="All Prices"
+                  focusColor="green"
+                  className="w-full sm:w-52 lg:w-60"
+                  icon={
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                  }
+                />
+              </div>
             </div>
-          )}
 
-          {/* Results Count */}
-          <div className="flex items-center gap-2 bg-white px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-200">
-            <div className="text-yellow-500">
-              <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-            </div>
-            <div className="text-gray-700 text-sm sm:text-base font-medium whitespace-nowrap">
-              {filteredListings.length} properties
+            {/* Right Side - Actions */}
+            <div className="flex items-center gap-4 w-full sm:w-auto">
+              {/* Clear All Filters Button */}
+              {(searchFilter || locationFilter !== 'All Locations' || priceFilter !== 'All Prices') && (
+                <button
+                  onClick={() => {
+                    setSearchFilter('');
+                    setLocationFilter('All Locations');
+                    setPriceFilter('All Prices');
+                  }}
+                  className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white w-12 h-12 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  title="Clear All Filters"
+                >
+                  <svg className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              )}
+
+              {/* Results Count */}
+              <div className="flex items-center gap-2 bg-white px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-gray-200 flex-shrink-0">
+                <div className="text-yellow-500">
+                  <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <div className="text-gray-700 text-sm sm:text-base font-medium whitespace-nowrap">
+                  {filteredListings.length} properties
+                </div>
+              </div>
             </div>
           </div>
         </div>
