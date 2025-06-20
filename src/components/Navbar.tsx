@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
             {/* Brand Logo */}
             <div className="flex items-center">
               <Link to="/" className="text-white text-xl lg:text-2xl font-bold hover:text-gray-200 transition-colors">
-                StayGo
+                StayFinder
               </Link>
             </div>
 
@@ -40,25 +40,25 @@ const Navbar: React.FC = () => {
                 to="/" 
                 className="text-white hover:text-gray-300 text-base font-normal transition-colors"
               >
-                Academy
+                Home
               </Link>
               <Link 
                 to="/listings" 
                 className="text-white hover:text-gray-300 text-base font-normal transition-colors"
               >
-                Club
+                Hotels
               </Link>
               <button 
                 onClick={() => navigate('/listings')}
                 className="text-white hover:text-gray-300 text-base font-normal transition-colors"
               >
-                Membership
+                Destinations
               </button>
               <button 
                 onClick={() => navigate('/listings')}
                 className="text-white hover:text-gray-300 text-base font-normal transition-colors"
               >
-                Tournament
+                Deals
               </button>
             </div>
 
@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
       <div className="lg:hidden fixed top-6 left-6 right-6 z-50 flex items-center justify-between">
         {/* App Name */}
         <Link to="/" className="text-white text-xl font-bold hover:text-gray-200 transition-colors">
-          StayGo
+          StayFinder
         </Link>
         
         {/* Mobile Menu Button */}
@@ -142,14 +142,24 @@ const Navbar: React.FC = () => {
               className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10"
               onClick={toggleMobileMenu}
             >
-              🎓 Academy
+              <div className="flex items-center">
+                <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+                </svg>
+                Home
+              </div>
             </Link>
             <Link 
               to="/listings" 
               className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10"
               onClick={toggleMobileMenu}
             >
-              🏨 Club
+              <div className="flex items-center">
+                <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V6H1v15h2v-3h18v3h2V7h-4z"/>
+                </svg>
+                Hotels
+              </div>
             </Link>
             <button 
               onClick={() => {
@@ -158,7 +168,12 @@ const Navbar: React.FC = () => {
               }}
               className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10 text-left w-full"
             >
-              👥 Membership
+              <div className="flex items-center">
+                <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                Destinations
+              </div>
             </button>
             <button 
               onClick={() => {
@@ -167,7 +182,12 @@ const Navbar: React.FC = () => {
               }}
               className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10 text-left w-full"
             >
-              🏆 Tournament
+              <div className="flex items-center">
+                <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                Deals
+              </div>
             </button>
             
             <hr className="border-white/20 my-4" />

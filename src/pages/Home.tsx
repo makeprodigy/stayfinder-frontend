@@ -35,13 +35,12 @@ const Home: React.FC = () => {
     });
   };
 
-  const roomTypes = ['Standard Rooms', 'Deluxe Rooms', 'Family Rooms', 'Business Rooms', 'Luxury Suites'];
-  const [activeRoomType, setActiveRoomType] = useState('Standard Rooms');
+
 
   return (
     <div className="min-h-screen bg-amber-100">
       {/* Hero Section */}
-      <div className="relative h-[92vh] bg-cover bg-center bg-no-repeat overflow-hidden rounded-b-3xl"
+      <div className="relative h-[75vh] sm:h-[80vh] lg:h-[92vh] bg-cover bg-center bg-no-repeat overflow-hidden rounded-b-3xl"
            style={{
              backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url("https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920&h=1080&fit=crop")'
            }}>
@@ -49,19 +48,19 @@ const Home: React.FC = () => {
 
 
         {/* Main Content - Side by Side Layout */}
-        <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center px-4 sm:px-8 lg:px-16 z-30 pt-20 lg:pt-0 gap-8 lg:gap-16">
+        <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center px-4 sm:px-8 lg:px-16 z-30 pt-24 sm:pt-28 lg:pt-0 gap-1 sm:gap-2 lg:gap-16">
           {/* Left Side - Hero Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="flex-1 max-w-full lg:max-w-2xl text-center lg:text-left"
+            className="flex-1 w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl text-center lg:text-left"
           >
-            <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-3 sm:mb-4 lg:mb-6">
+            <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-2 sm:mb-3 lg:mb-6">
               Perfect Stay<br />
               Every Time.
             </h1>
-            <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl mb-4 sm:mb-6 lg:mb-8 leading-relaxed max-w-full lg:max-w-lg mx-auto lg:mx-0 font-medium" 
+            <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl mb-3 sm:mb-4 lg:mb-8 leading-relaxed max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto lg:mx-0 font-medium" 
                style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>
               Explore handpicked hotels with seamless booking, exclusive offers, and unmatched hospitality
             </p>
@@ -79,7 +78,7 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex-1 w-full max-w-full lg:max-w-lg"
+            className="flex-1 w-full max-w-md sm:max-w-lg lg:max-w-lg"
           >
             <div className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl shadow-2xl p-4 sm:p-6">
               {/* Search Inputs */}
@@ -87,7 +86,9 @@ const Home: React.FC = () => {
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Location</label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-500">📍</span>
+                    <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
                     <input
                       type="text"
                       placeholder="Find Location"
@@ -101,7 +102,9 @@ const Home: React.FC = () => {
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Guest and Rooms</label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-500">👥</span>
+                    <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17c-.8 0-1.54.37-2.01.99L14 10l-1-1 .4-2.2A1.5 1.5 0 0 0 12 5.5h-2A1.5 1.5 0 0 0 8.5 7v6L6 15.5V22h2v-5l2-1.5V22h8zM12.5 11.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm-6-7c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2z"/>
+                    </svg>
                     <select
                       value={guests}
                       onChange={(e) => setGuests(e.target.value)}
@@ -120,7 +123,9 @@ const Home: React.FC = () => {
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Check In- Check Out Date</label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-500">📅</span>
+                    <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                    </svg>
                     <input
                       type="text"
                       placeholder="Add Date"
@@ -221,22 +226,7 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          {/* Room Type Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {roomTypes.map((type) => (
-              <button
-                key={type}
-                onClick={() => setActiveRoomType(type)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                  activeRoomType === type
-                    ? 'bg-yellow-500 text-black'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
+
 
           {/* Featured Listings */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -252,7 +242,9 @@ const Home: React.FC = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{listing.title}</h3>
                   <div className="flex items-center text-gray-600 mb-3">
-                    <span className="mr-1">📍</span>
+                    <svg className="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
                     <span className="text-sm">{listing.location}</span>
                   </div>
                   <div className="flex items-center justify-between">
@@ -261,7 +253,9 @@ const Home: React.FC = () => {
                       <span className="text-gray-600 text-sm ml-1">/night</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-orange-500 mr-1">★</span>
+                      <svg className="w-4 h-4 text-orange-500 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
                       <span className="font-semibold text-gray-900">4.8</span>
                       <span className="text-gray-500 text-sm ml-1">({Math.floor(Math.random() * 500 + 100)} Reviews)</span>
                     </div>
