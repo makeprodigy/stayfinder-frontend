@@ -62,8 +62,8 @@ const ListingDetails: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Container maxWidth="lg" className="py-8">
+    <div className="min-h-screen bg-amber-100">
+      <Container maxWidth="lg" className="pt-32 pb-8 lg:h-screen lg:overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,20 +74,52 @@ const ListingDetails: React.FC = () => {
               {listing.title}
             </Typography>
             
-            <Typography variant="h6" className="mb-4 text-gray-600">
+            <Typography variant="h6" className="mb-6 text-gray-600">
               📍 {listing.location}
             </Typography>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div className="md:col-span-2">
+            {/* Main Content Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-6">
+              {/* Left Side - Image */}
+              <motion.div 
+                className="lg:col-span-5"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 sticky top-4">
+                  <img
+                    src={listing.images?.[0] || 'https://via.placeholder.com/400x300.png?text=No+Image'}
+                    alt={listing.title}
+                    className="w-full h-64 md:h-80 object-cover hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'https://via.placeholder.com/400x300.png?text=Image+Not+Available';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                </div>
+              </motion.div>
+
+              {/* Middle - Content */}
+              <div className="lg:col-span-4">
+                {/* Enhanced Description Section */}
                 <Typography variant="body1" className="mb-4 text-gray-700 leading-relaxed">
                   {listing.description}
                 </Typography>
                 
-                <Box className="mb-4">
-                  <Typography variant="h6" className="mb-2">
-                    Amenities
-                  </Typography>
+                {/* Additional Details */}
+                <Box className="mb-6">
+                  <ul className="list-disc list-inside space-y-1 text-gray-700 mb-6 text-sm">
+                    <li>Prime location near attractions</li>
+                    <li>24/7 professional support</li>
+                    <li>Modern amenities & comfort</li>
+                    <li>Business & leisure friendly</li>
+                    <li>High-speed WiFi throughout</li>
+                    <li>Local recommendations included</li>
+                  </ul>
+                  
+                  {/* Amenities without heading */}
                   <Box className="flex flex-wrap gap-2">
                     {listing.amenities?.map((amenity, index) => (
                       <Chip key={index} label={amenity} variant="outlined" />
@@ -95,18 +127,21 @@ const ListingDetails: React.FC = () => {
                   </Box>
                 </Box>
               </div>
-              
-              <div className="md:col-span-1">
-                <Paper elevation={2} className="p-6 bg-blue-50">
-                  <Typography variant="h4" className="mb-4 text-blue-600 font-bold">
-                    ${listing.price}/night
-                  </Typography>
-                  
-                  <Box className="mb-4 space-y-2">
-                    <Typography>👥 Max Guests: {listing.maxGuests}</Typography>
-                    <Typography>🛏️ Bedrooms: {listing.bedrooms}</Typography>
-                    <Typography>🚿 Bathrooms: {listing.bathrooms}</Typography>
-                  </Box>
+
+              {/* Right Side - Pricing */}
+              <div className="lg:col-span-3">
+                <Paper elevation={2} className="p-4 bg-blue-50 h-64 md:h-80 flex flex-col justify-between sticky top-4">
+                  <div>
+                    <Typography variant="h4" className="mb-3 text-blue-600 font-bold">
+                      ₹{listing.price}/night
+                    </Typography>
+                    
+                    <Box className="space-y-1 mb-4">
+                      <Typography className="text-sm">👥 Max Guests: {listing.maxGuests}</Typography>
+                      <Typography className="text-sm">🛏️ Bedrooms: {listing.bedrooms}</Typography>
+                      <Typography className="text-sm">🚿 Bathrooms: {listing.bathrooms}</Typography>
+                    </Box>
+                  </div>
                   
                   <Button
                     variant="contained"

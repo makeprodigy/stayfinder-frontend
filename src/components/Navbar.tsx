@@ -1,53 +1,221 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const token = localStorage.getItem('token');
   const isLoggedIn = !!token;
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/');
   };
 
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
-    <nav className="bg-blue-600 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
-            <Link to="/" className="text-white text-xl font-bold hover:text-blue-100 transition-colors">
-              StayFinder
-            </Link>
-          </div>
-          <div className="flex items-center space-x-4">
-            {isLoggedIn ? (
-              <button 
-                onClick={handleLogout}
-                className="text-white hover:text-blue-100 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+    <>
+      {/* Desktop Navbar - Hidden on mobile */}
+      <nav className="hidden lg:block absolute top-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-6xl px-6">
+        <div className="bg-black/20 backdrop-blur-md rounded-full border border-white/10">
+          <div className="flex justify-between items-center h-16 px-8">
+            {/* Brand Logo */}
+            <div className="flex items-center">
+              <Link to="/" className="text-white text-xl lg:text-2xl font-bold hover:text-gray-200 transition-colors">
+                StayGo
+              </Link>
+            </div>
+
+            {/* Navigation Links - Desktop */}
+            <div className="flex items-center space-x-8">
+              <Link 
+                to="/" 
+                className="text-white hover:text-gray-300 text-base font-normal transition-colors"
               >
-                Logout
+                Academy
+              </Link>
+              <Link 
+                to="/listings" 
+                className="text-white hover:text-gray-300 text-base font-normal transition-colors"
+              >
+                Club
+              </Link>
+              <button 
+                onClick={() => navigate('/listings')}
+                className="text-white hover:text-gray-300 text-base font-normal transition-colors"
+              >
+                Membership
               </button>
+              <button 
+                onClick={() => navigate('/listings')}
+                className="text-white hover:text-gray-300 text-base font-normal transition-colors"
+              >
+                Tournament
+              </button>
+            </div>
+
+            {/* Right Side Actions */}
+            <div className="flex items-center space-x-3">
+              {isLoggedIn ? (
+                <div className="flex items-center space-x-3">
+                  <button 
+                    onClick={() => navigate('/listings')}
+                    className="text-white border border-white/40 hover:bg-white/10 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+                  >
+                    My Bookings
+                  </button>
+                  <button 
+                    onClick={handleLogout}
+                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-3">
+                  <Link 
+                    to="/login"
+                    className="text-white border border-white/40 hover:bg-white/10 px-5 py-2 rounded-full text-sm font-medium transition-all duration-200"
+                  >
+                    Log in
+                  </Link>
+                  <Link 
+                    to="/register"
+                    className="bg-yellow-500 hover:bg-yellow-600 text-black px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200"
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Header - Only visible on mobile */}
+      <div className="lg:hidden fixed top-6 left-6 right-6 z-50 flex items-center justify-between">
+        {/* App Name */}
+        <Link to="/" className="text-white text-xl font-bold hover:text-gray-200 transition-colors">
+          StayGo
+        </Link>
+        
+        {/* Mobile Menu Button */}
+        <button 
+          onClick={toggleMobileMenu}
+          className="bg-black/20 backdrop-blur-md rounded-full p-3 border border-white/10 text-white hover:bg-black/30 transition-all duration-200"
+        >
+          <svg 
+            className={`w-6 h-6 transition-transform duration-200 ${isMobileMenuOpen ? 'rotate-45' : ''}`} 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            {isMobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             ) : (
-              <>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay - Only visible when open */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-40">
+          <div 
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={toggleMobileMenu}
+          ></div>
+                     <div className="absolute top-20 left-6 right-6 bg-black/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 space-y-4">
+
+            {/* Navigation Links */}
+            <Link 
+              to="/" 
+              className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10"
+              onClick={toggleMobileMenu}
+            >
+              🎓 Academy
+            </Link>
+            <Link 
+              to="/listings" 
+              className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10"
+              onClick={toggleMobileMenu}
+            >
+              🏨 Club
+            </Link>
+            <button 
+              onClick={() => {
+                navigate('/listings');
+                toggleMobileMenu();
+              }}
+              className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10 text-left w-full"
+            >
+              👥 Membership
+            </button>
+            <button 
+              onClick={() => {
+                navigate('/listings');
+                toggleMobileMenu();
+              }}
+              className="block text-white hover:text-gray-200 text-lg font-medium transition-colors py-3 px-4 rounded-lg hover:bg-white/10 text-left w-full"
+            >
+              🏆 Tournament
+            </button>
+            
+            <hr className="border-white/20 my-4" />
+            
+            {/* Auth Actions */}
+            {isLoggedIn ? (
+              <div className="space-y-3">
+                <button 
+                  onClick={() => {
+                    navigate('/listings');
+                    toggleMobileMenu();
+                  }}
+                  className="block w-full text-white border border-white/40 hover:bg-white/10 text-center py-3 px-4 rounded-lg transition-all"
+                >
+                  My Bookings
+                </button>
+                <button 
+                  onClick={() => {
+                    handleLogout();
+                    toggleMobileMenu();
+                  }}
+                  className="block w-full bg-red-500 hover:bg-red-600 text-white text-center py-3 px-4 rounded-lg font-semibold transition-all"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-3">
                 <Link 
                   to="/login"
-                  className="text-white hover:text-blue-100 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  className="block text-white border border-white/40 hover:bg-white/10 text-center py-3 px-4 rounded-lg transition-all"
+                  onClick={toggleMobileMenu}
                 >
-                  Login
+                  Log in
                 </Link>
                 <Link 
                   to="/register"
-                  className="text-white hover:text-blue-100 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  className="block bg-yellow-500 hover:bg-yellow-600 text-black text-center py-3 px-4 rounded-lg font-semibold transition-all"
+                  onClick={toggleMobileMenu}
                 >
                   Register
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>
-      </div>
-    </nav>
+      )}
+    </>
   );
 };
 
