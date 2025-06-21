@@ -304,7 +304,7 @@ This project is licensed under the MIT License.
 - **Backend Repository**: [stayfinder-backend](https://github.com/makeprodigy/stayfinder-backend)
 - **Backend API**: [StayFinder API](https://stayfinder-backend-ygil.onrender.com)
 
-## 🙏 Acknowledgments
+## 📜 Acknowledgments
 
 - **Design Inspiration**: Airbnb, Booking.com
 - **Icons**: Heroicons
